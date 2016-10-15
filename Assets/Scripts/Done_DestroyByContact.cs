@@ -6,6 +6,7 @@ public class Done_DestroyByContact : MonoBehaviour
 	public GameObject explosion;
 	public GameObject playerExplosion;
 	public int scoreValue;
+	public bool isBullet;
 	private Done_GameController gameController;
 
 	void Start ()
@@ -23,6 +24,9 @@ public class Done_DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+		if (isBullet && (other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Bullet")) {
+			return;
+		}
 		if (other.tag == "Boundary" || other.tag == "Enemy")
 		{
 			return;
