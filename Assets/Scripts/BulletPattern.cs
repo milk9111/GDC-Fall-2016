@@ -31,26 +31,58 @@ public class BulletPattern : MonoBehaviour {
 	void Start ()
 	{
 		float totalDegrees = 360;
-		if (halfMoon) {
+		/*if (halfMoon) {
 			totalDegrees = 180;
-			halfsies = 68 + bulletDetails.shotCount;
-		}
+		}*/
 
 		//shotAngle is used to space the bullets out evenly.
-		if (bulletDetails.shotCount != 1) {
-			shotAngle = (totalDegrees / bulletDetails.shotCount) % totalDegrees;
+		if (bulletDetails.shotCount != 1 && bulletDetails.shotCount != 0) {
+			shotAngle = (totalDegrees / bulletDetails.shotCount);
 		} else {
 			shotAngle = 180;
 		}
 		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
-	void Fire ()
+	public void Fire ()
 	{
 		//This will instantiate the specified number of bullets at the specified directions
-		for (int i = 0; i < bulletDetails.shotCount; i++) {
-			Instantiate (shot, shotSpawn.position, 
-				Quaternion.Euler(new Vector3 (0.0f, shotAngle * (i + 1) + halfsies, 0.0f)));
+		/*for (int i = 0; i < bulletDetails.shotCount; i++) {
+			GameObject clone = Instantiate (shot, transform.position, 
+				Quaternion.Euler(new Vector3 (0.0f, shotAngle * (i + 1) + halfsies, 0.0f))) as GameObject;
+			Debug.Log ("rotation: " + shotAngle * (i + 1));
+		}*/
+
+		float padding = 0;
+		if (halfMoon && shotAngle < 90) {
+			padding += 90 - shotAngle;
+		}
+
+		if (bulletDetails.shotCount % 2 != 1) {
+			padding += shotAngle / 4;
+		}
+
+		float currentAngle = shotAngle + padding;
+
+		Instantiate (shot, transform.position, 
+			Quaternion.Euler(new Vector3 (0.0f, currentAngle, 0.0f)));
+		Debug.Log ("first rotation: " + currentAngle);
+		
+		if (halfMoon) {
+			halfsies = shotAngle / 2;
+		}
+
+		//This will instantiate the specified number of bullets at the specified directions
+		for (int i = 1; i < bulletDetails.shotCount; i++) {
+			if (halfMoon) {
+				currentAngle = shotAngle + (halfsies * i) + padding;
+			} else {
+				currentAngle = (shotAngle * (i + 1)) + padding;
+			}
+			Instantiate (shot, transform.position, 
+				Quaternion.Euler(new Vector3 (0.0f, currentAngle, 0.0f)));
+			Debug.Log ("rotation: " + currentAngle);
+			//Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
 		}
 	}
 }
