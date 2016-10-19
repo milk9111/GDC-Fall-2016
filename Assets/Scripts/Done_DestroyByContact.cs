@@ -22,8 +22,9 @@ public class Done_DestroyByContact : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter (Collider other)
+	void OnTriggerEnter2D (Collider2D other)
 	{
+        Debug.Log(other.name);
 		if (isBullet && (other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Bullet")) {
 			return;
 		}
