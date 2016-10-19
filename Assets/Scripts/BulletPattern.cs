@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 //This class is also temporary. It is just here for organization.
@@ -14,7 +14,7 @@ public class BulletPattern : MonoBehaviour {
 	//will be instantiated by a later bullet system that
 	//will be applied to all enemies.
 
-	public Rigidbody shot;
+	public GameObject shot;
 	public Transform shotSpawn;
 	public bool halfMoon;
 	public BulletDetails bulletDetails;
@@ -62,11 +62,10 @@ public class BulletPattern : MonoBehaviour {
 			padding += shotAngle / 4;
 		}
 
-		float currentAngle = shotAngle + padding;
+        float currentAngle = shotAngle + padding;
 
-		Instantiate (shot, transform.position, 
-			Quaternion.Euler(new Vector3 (0.0f, currentAngle, 0.0f)));
-		Debug.Log ("first rotation: " + currentAngle);
+        Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+		//Debug.Log ("first rotation: " + currentAngle);
 		
 		if (halfMoon) {
 			halfsies = shotAngle / 2;
@@ -78,11 +77,10 @@ public class BulletPattern : MonoBehaviour {
 				currentAngle = shotAngle + (halfsies * i) + padding;
 			} else {
 				currentAngle = (shotAngle * (i + 1)) + padding;
-			}
-			Instantiate (shot, transform.position, 
-				Quaternion.Euler(new Vector3 (0.0f, currentAngle, 0.0f)));
-			Debug.Log ("rotation: " + currentAngle);
-			//Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
-		}
+            }
+            Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+            //Debug.Log ("rotation: " + currentAngle);
+            //Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
+        }
 	}
 }

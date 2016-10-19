@@ -1,15 +1,22 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Done_Mover : MonoBehaviour
 {
 	public float speed;
+    public Vector2 velocity;
 
-	//This is the default speed for the bullets. Bullet patterns for enemies 
+	//This is the default speed for the bullets and enemies. Bullet patterns for enemies 
 	//will override this.
 	void Start ()
 	{
-		GetComponent<Rigidbody>().velocity = transform.forward * speed;
-		//Debug.Log ("The velocity is: " + GetComponent<Rigidbody> ().velocity);
+        velocity.x = Mathf.Sin(transform.eulerAngles.y * (Mathf.PI / 180)) * speed;
+        velocity.y = Mathf.Cos(transform.eulerAngles.z * (Mathf.PI / 180)) * speed;
 	}
+
+    void Update() {
+        //Debug.Log("Pre: Velocity: " + velocity.ToString() + " Pos: " + transform.position.ToString());
+        transform.Translate(velocity * Time.deltaTime);
+        //Debug.Log("Post: Velocity: " + velocity.ToString() + " Pos: " + transform.position.ToString());
+    }
 }
