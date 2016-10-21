@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Done_DestroyByContact : MonoBehaviour
@@ -24,7 +24,6 @@ public class Done_DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-        Debug.Log(other.name);
 		if (isBullet && (other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Bullet")) {
 			return;
 		}
