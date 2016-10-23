@@ -13,6 +13,7 @@ public class Done_PlayerController : MonoBehaviour
 	public float tilt;
 	public Done_Boundary boundary;
 
+	public GameObject playerModel;
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
@@ -52,6 +53,6 @@ public class Done_PlayerController : MonoBehaviour
 
         //testInt++;
         //Disabling rotation of the rigid body for the moment, this will need to be done by rotating the model now.
-        //GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
+		//playerModel.transform.rotation = Quaternion.Euler (GetComponent<Rigidbody2D>().velocity.y * -tilt, 0.0f, 0.0f);
     }
 }
