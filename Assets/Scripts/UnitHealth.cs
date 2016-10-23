@@ -11,8 +11,8 @@ public class UnitHealth : MonoBehaviour {
 	void Start() {
 
 		currentHealth = maxHealth;
-		Debug.Log("Max Health: "+ maxHealth);
-		Debug.Log("Current Health: "+ currentHealth);
+		//Debug.Log("Max Health: "+ maxHealth);
+		//Debug.Log("Current Health: "+ currentHealth);
 		
 		if (DISPLAY_HEALTH) {
 			Debug.Log("Health Bar");
