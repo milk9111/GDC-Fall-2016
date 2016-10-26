@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class CirclePattern : BulletPattern, Pattern {
+public class CirclePattern : BulletPattern {
 
 	private bool halfMoon = true;
 	private float shotAngle;
@@ -45,7 +46,7 @@ public class CirclePattern : BulletPattern, Pattern {
 		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
-	public void Fire ()
+	public override void Fire ()
 	{
 		Debug.Log ("in CirclePattern fire");
 		float padding = 0;

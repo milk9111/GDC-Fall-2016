@@ -21,20 +21,22 @@ public class BulletSystem : MonoBehaviour {
 				break;
 		}*/
 		Debug.Log (patternType.Equals("C"));
-		if (patternType.Equals ("C")) {
+		/*if (patternType.Equals ("C")) {
 			pattern = Instantiate (bulletPattern, spawn) as CirclePattern;
 		} else {
 			pattern = Instantiate (bulletPattern, spawn) as BulletPattern;
-		}
-		//StartCoroutine (StartFire ());
+		}*/
+		StartCoroutine (StartFire ());
 	}
 
 	IEnumerator StartFire () {
+
 		Debug.Log ("inside coroutine");
 		while (true) {
 			Debug.Log ("inside coroutine loop");
-			Debug.Log (pattern);
-			pattern.Invoke ("Fire", pattern.GetDetails ().delay);
+			//Debug.Log (pattern);
+            pattern.Fire();
+			//pattern.Invoke ("Fire", pattern.GetDetails ().delay);
 			Debug.Log ("fired a shot");
 			yield return new WaitForSeconds (pattern.GetDetails().delay);
 		}

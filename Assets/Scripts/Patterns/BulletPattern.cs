@@ -8,7 +8,7 @@ public class BulletDetails {
 	public int shotCount;
 }
 
-public class BulletPattern : MonoBehaviour, Pattern {
+public abstract class BulletPattern : MonoBehaviour, Pattern {
 
 	//These will be changed to private as this bullet pattern
 	//will be instantiated by a later bullet system that
@@ -24,13 +24,10 @@ public class BulletPattern : MonoBehaviour, Pattern {
 		shot = theShot;
 		shotSpawn = theShotSpawn;
 		bulletDetails = theBulletDetails;
-		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
+		//InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
-	public void Fire () {		
-		Debug.Log ("in BulletPattern fire");
-		Instantiate (shot, shotSpawn);
-	}
+    public abstract void Fire();
 
 	public Transform GetShotSpawn () {
 		return shotSpawn;
