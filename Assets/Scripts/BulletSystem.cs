@@ -3,15 +3,15 @@ using System.Collections;
 
 public class BulletSystem : MonoBehaviour {	
 
-	public GameObject bulletPattern;
-	public Transform spawn;
+	public GameObject shot;
+	public Transform shotSpawn;
+	public BulletDetails details;
 	public string patternType;
-
-	private BulletPattern pattern;
+	private Pattern pattern;
 
 	// Use this for initialization
 	void Start () {
-		pattern = bulletPattern.GetComponent<BulletPattern> ();
+		Debug.Log ("in BulletSystem start");
 		/*switch (patternType) {
 		case "C": 
 			Debug.Log ("in C case");
@@ -20,13 +20,9 @@ public class BulletSystem : MonoBehaviour {
 			default:
 				break;
 		}*/
-		Debug.Log (patternType.Equals("C"));
-		if (patternType.Equals ("C")) {
-			pattern = Instantiate (bulletPattern, spawn) as CirclePattern;
-		} else {
-			pattern = Instantiate (bulletPattern, spawn) as BulletPattern;
-		}
-		//StartCoroutine (StartFire ());
+		pattern = new CirclePattern (shot, shotSpawn, details, true);
+		Debug.Log ("about to start coroutine");
+		StartCoroutine (StartFire ());
 	}
 
 	IEnumerator StartFire () {
@@ -34,9 +30,9 @@ public class BulletSystem : MonoBehaviour {
 		while (true) {
 			Debug.Log ("inside coroutine loop");
 			Debug.Log (pattern);
-			pattern.Invoke ("Fire", pattern.GetDetails ().delay);
+			pattern.Fire ();
 			Debug.Log ("fired a shot");
-			yield return new WaitForSeconds (pattern.GetDetails().delay);
+			yield return new WaitForSeconds (details.delay);
 		}
 	}
 }

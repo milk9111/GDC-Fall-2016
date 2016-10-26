@@ -24,19 +24,8 @@ public class BulletPattern : MonoBehaviour, Pattern {
 		shot = theShot;
 		shotSpawn = theShotSpawn;
 		bulletDetails = theBulletDetails;
-		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
-	public void Fire () {		
-		Debug.Log ("in BulletPattern fire");
-		Instantiate (shot, shotSpawn);
-	}
-
-	public Transform GetShotSpawn () {
-		return shotSpawn;
-	}
-
-	public BulletDetails GetDetails () {
-		return bulletDetails;
-	}
+	public void Fire () {		Debug.Log ("in BulletPattern fire");
+		}
 }

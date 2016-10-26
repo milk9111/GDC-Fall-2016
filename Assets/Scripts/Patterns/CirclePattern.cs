@@ -3,10 +3,9 @@ using System.Collections;
 
 public class CirclePattern : BulletPattern, Pattern {
 
-	private bool halfMoon = true;
+	private bool halfMoon;
 	private float shotAngle;
 	private float halfsies;
-
 
 	public CirclePattern (GameObject theShot, Transform theShotSpawn, BulletDetails theBulletDetails, bool theHalfMoon) :
 		base (theShot, theShotSpawn, theBulletDetails)
@@ -26,23 +25,6 @@ public class CirclePattern : BulletPattern, Pattern {
 			shotAngle = 180;
 		}
 		//InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
-	}
-
-	void Start ()
-	{
-		Debug.Log ("CirclePattern Start");
-		float totalDegrees = 360;
-		/*if (halfMoon) {
-			totalDegrees = 180;
-		}*/
-
-		//shotAngle is used to space the bullets out evenly.
-		if (bulletDetails.shotCount != 1 && bulletDetails.shotCount != 0) {
-			shotAngle = (totalDegrees / bulletDetails.shotCount);
-		} else {
-			shotAngle = 180;
-		}
-		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
 	public void Fire ()
