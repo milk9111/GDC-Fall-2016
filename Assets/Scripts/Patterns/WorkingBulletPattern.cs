@@ -38,9 +38,9 @@ public class WorkingBulletPattern : MonoBehaviour {
 		}
 
 		float currentAngle = shotAngle + padding;
-
+        //not getting correct speeds, I think it is from the actual Done_Mover script
 		Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-		//Debug.Log ("first rotation: " + currentAngle);
+		Debug.Log ("first rotation: " + currentAngle);
 
 		if (halfMoon) {
 			halfsies = shotAngle / 2;
@@ -54,7 +54,7 @@ public class WorkingBulletPattern : MonoBehaviour {
 				currentAngle = (shotAngle * (i + 1)) + padding;
 			}
 			Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-			//Debug.Log ("rotation: " + currentAngle);
+			Debug.Log ("rotation: " + currentAngle);
 			//Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
 		}
 

@@ -30,9 +30,9 @@ public class Done_PlayerController : MonoBehaviour
 	void Update ()
 	{
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1")) //&& Time.time > nextFire) 
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1") && Time.time > nextFire) 
         {
-            //nextFire = Time.time + fireRate;
+            nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
             GetComponent<AudioSource>().Play();
         }
