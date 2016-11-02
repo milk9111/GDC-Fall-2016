@@ -24,17 +24,17 @@ public class Done_DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (isBullet && (other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Bullet")) {
+		if (isBullet && (other.tag == "Boundary" || other.tag.Contains("Enemy"))) {
 			return;
 		}
-		if (other.tag == "Boundary" || other.tag == "Enemy")
+		if (other.tag == "Boundary" || other.tag.Contains("Enemy"))
 		{
 			return;
 		}
 
 		if (explosion != null)
 		{
-			Instantiate(explosion, transform.position, transform.rotation);
+			Instantiate (explosion, transform.position, transform.rotation);
 		}
 
 		if (other.tag == "Player")
@@ -46,5 +46,9 @@ public class Done_DestroyByContact : MonoBehaviour
 		gameController.AddScore(scoreValue);
 		Destroy (other.gameObject);
 		Destroy (gameObject);
+		if (other.tag != "Player") {
+			gameController.totalHazards--;
+			Debug.Log ("DestroyByContact totalHazards: " + gameController.totalHazards);
+		}
 	}
 }

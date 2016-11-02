@@ -32,7 +32,6 @@ public class SlowEnemyMovement : MonoBehaviour {
 			if (boundary.xMax - transform.position.x <= 3 || transform.position.x - boundary.xMin <= 3) {
 				targetManeuver = dodge * -Mathf.Sign (transform.position.x);
 			}
-			//targetManeuver = 0;
 			yield return new WaitForSeconds (Random.Range (maneuverWait.x, maneuverWait.y));
 		}
 	}

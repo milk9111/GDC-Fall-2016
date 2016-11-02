@@ -3,12 +3,16 @@ using System.Collections;
 
 public class Done_GameController : MonoBehaviour
 {
+	//both hazards and hazardsCount are parallel arrays. Hazards must be the same size as
 	public GameObject[] hazards;
+	public int[] hazardsCount;
+
 	public Vector3 spawnValues;
-	public int hazardCount;
+	//public int hazardCount;
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
+	public int totalHazards;
 	
 	public GUIText scoreText;
 	public GUIText restartText;
@@ -17,9 +21,14 @@ public class Done_GameController : MonoBehaviour
 	private bool gameOver;
 	private bool restart;
 	private int score;
+	private int head;
 	
 	void Start ()
 	{
+		for (int i = 0; i < hazardsCount.Length; i++) {
+			totalHazards += hazardsCount [i];
+		}
+		Debug.Log (totalHazards);
 		gameOver = false;
 		restart = false;
 		restartText.text = "";
@@ -51,9 +60,10 @@ public class Done_GameController : MonoBehaviour
 				restart = true;
 				break;
 			}
-			for (int i = 0; i < hazardCount; i++)
+
+			for (int i = 0; i < hazardsCount[head % hazardsCount.Length] && head < hazardsCount.Length; i++)
 			{
-				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
+				GameObject hazard = hazards [head % hazardsCount.Length];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 //Debug.Log(spawnPosition);
 
@@ -61,14 +71,19 @@ public class Done_GameController : MonoBehaviour
 				Instantiate (hazard, spawnPosition, spawnRotation);
 
 				if (!gameOver) {
-					yield return new WaitForSeconds (spawnWait);
+					yield return new WaitForSeconds (Random.Range(1f, spawnWait));
 				}
 			}
 
 			if (!gameOver) {
-				yield return new WaitForSeconds (waveWait);
+				yield return new WaitForSeconds (Random.Range(1f, waveWait));
 			}
+			head++;
+			Debug.Log (hazardsCount.Length + " " + head);
 
+			if (totalHazards <= 0 && !gameOver) {
+				WinGame ();
+			}
 		}
 	}
 	
@@ -86,6 +101,11 @@ public class Done_GameController : MonoBehaviour
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over!";
+		gameOver = true;
+	}
+
+	public void WinGame () {
+		gameOverText.text = "Level Complete";
 		gameOver = true;
 	}
 }
