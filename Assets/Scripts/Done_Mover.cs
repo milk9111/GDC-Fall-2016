@@ -11,7 +11,7 @@ public class Done_Mover : MonoBehaviour
 	void Start ()
 	{
         velocity.x = Mathf.Sin(transform.eulerAngles.y * (Mathf.PI / 180)) * speed;
-        velocity.y = Mathf.Cos(transform.eulerAngles.z * (Mathf.PI / 180)) * speed;
+        velocity.y = Mathf.Cos(transform.eulerAngles.y * (Mathf.PI / 180)) * speed;
 	}
 
     void Update() {

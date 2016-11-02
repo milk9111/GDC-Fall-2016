@@ -13,8 +13,8 @@ public class RotatingPattern : MonoBehaviour {
 
 	public void Start ()
 	{
-		rb = shotSpawn.GetComponent<Rigidbody> ();
-		rb.angularVelocity = new Vector3 (0, 0, tumbleSpeed);
+		//rb = shotSpawn.GetComponent<Rigidbody> ();
+		//rb.angularVelocity = new Vector3 (0, 0, tumbleSpeed);
 		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
@@ -22,4 +22,9 @@ public class RotatingPattern : MonoBehaviour {
 	{
 		Instantiate (shot, transform.position, shotSpawn.rotation);
 	}
+
+    void FixedUpdate()
+    {
+        shotSpawn.Rotate(new Vector3(0.0f, 0.0f, shotSpawn.rotation.z + tumbleSpeed));
+    }
 }
