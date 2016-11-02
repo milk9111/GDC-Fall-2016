@@ -33,7 +33,8 @@ public class Done_PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1") && Time.time > nextFire) 
         {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            // Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            BulletCache.activeCache.getPlayerBullet(0, shotSpawn.position, shotSpawn.rotation);
             GetComponent<AudioSource>().Play();
         }
 
