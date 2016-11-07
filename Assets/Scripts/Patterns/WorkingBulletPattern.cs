@@ -33,7 +33,7 @@ public class WorkingBulletPattern : MonoBehaviour {
 			padding += 90 - shotAngle;
 		}
 
-		if (bulletDetails.shotCount % 2 != 1) {
+		if (halfMoon && bulletDetails.shotCount % 2 != 1) {
 			padding += shotAngle / 4;
 		}
 

@@ -6,10 +6,11 @@ public class Done_GameController : MonoBehaviour
 	//both hazards and hazardsCount are parallel arrays. Hazards must be the same size as
 	public GameObject[] hazards;
 	public int[] hazardsCount;
+	public float[] spawnWaits;
 
 	public Vector3 spawnValues;
 	//public int hazardCount;
-	public float spawnWait;
+	//public float spawnWait;
 	public float startWait;
 	public float waveWait;
 	public int totalHazards;
@@ -71,7 +72,7 @@ public class Done_GameController : MonoBehaviour
 				Instantiate (hazard, spawnPosition, spawnRotation);
 
 				if (!gameOver) {
-					yield return new WaitForSeconds (Random.Range(1f, spawnWait));
+					yield return new WaitForSeconds (spawnWaits[head]);
 				}
 			}
 
