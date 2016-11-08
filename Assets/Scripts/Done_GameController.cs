@@ -13,7 +13,6 @@ public class Done_GameController : MonoBehaviour
 	//public float spawnWait;
 	public float startWait;
 	public float waveWait;
-	public int totalHazards;
 	
 	public GUIText scoreText;
 	public GUIText restartText;
@@ -23,6 +22,7 @@ public class Done_GameController : MonoBehaviour
 	private bool restart;
 	private int score;
 	private int head;
+	public int totalHazards;
 	
 	void Start ()
 	{
@@ -37,6 +37,10 @@ public class Done_GameController : MonoBehaviour
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
+	}
+
+	void OnBegin () {
+		
 	}
 	
 	void Update ()
@@ -62,9 +66,9 @@ public class Done_GameController : MonoBehaviour
 				break;
 			}
 
-			for (int i = 0; i < hazardsCount[head % hazardsCount.Length] && head < hazardsCount.Length; i++)
+			for (int i = 0; i < hazardsCount[head] && head < hazardsCount.Length; i++)
 			{
-				GameObject hazard = hazards [head % hazardsCount.Length];
+				GameObject hazard = hazards [head];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 //Debug.Log(spawnPosition);
 
