@@ -9,6 +9,7 @@ public class Done_DestroyByContact : MonoBehaviour
 	public bool isBullet;
 	private Done_GameController gameController;
 
+	/*
 	void Start ()
 	{
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
@@ -51,4 +52,5 @@ public class Done_DestroyByContact : MonoBehaviour
 			Debug.Log ("DestroyByContact totalHazards: " + gameController.totalHazards);
 		}
 	}
+	*/
 }
