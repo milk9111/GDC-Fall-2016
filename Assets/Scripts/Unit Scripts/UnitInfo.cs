@@ -53,6 +53,8 @@ public class UnitInfo : MonoBehaviour {
 			}
 
 			if (currentHealth <= 0) {
+
+				GameObject.Find("Game Overlay").GetComponent<ScoreTracker>().increaseScore(points);
 				Destroy(this.gameObject);
 			}
 		}
@@ -101,11 +103,4 @@ public class UnitInfo : MonoBehaviour {
 	public bool isDisplayHealth() {
 		return DISPLAY_HEALTH;
 	}
-
-	/*
-	public void OnDestroy() {
-		GameObject.Find("UI Overlay").GetComponent<ScoreTracker>().increaseScore(points);
-		//Instantiate Explosion or something
-	}
-	*/
 }
