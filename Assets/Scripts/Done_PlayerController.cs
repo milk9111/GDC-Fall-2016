@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -34,7 +34,11 @@ public class Done_PlayerController : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             //Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-            BulletCache.activeCache.getPlayerBullet(0, shotSpawn.position, shotSpawn.rotation);
+
+			//On this line we need to be able to change 0 in order to get the correct bullet for 
+			//the player depending on the current ability used. Changing it to 1 for now to test
+			//the mage bullet sprite.
+            BulletCache.activeCache.getPlayerBullet(1, shotSpawn.position, shotSpawn.rotation);
             GetComponent<AudioSource>().Play();
         }
 
