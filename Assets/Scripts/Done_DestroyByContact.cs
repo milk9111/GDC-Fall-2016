@@ -48,8 +48,7 @@ public class Done_DestroyByContact : MonoBehaviour
 		Destroy (other.gameObject);
 		Destroy (gameObject);
 		if (other.tag != "Player") {
-			gameController.totalHazards--;
-			Debug.Log ("DestroyByContact totalHazards: " + gameController.totalHazards);
+			Done_GameController.totalHazards--;
 		}
 	}
 

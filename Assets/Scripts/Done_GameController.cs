@@ -3,10 +3,15 @@ using System.Collections;
 
 public class Done_GameController : MonoBehaviour
 {
+	[System.Serializable]
+	public class Hazard
+	{
+		public GameObject enemy;
+		public int enemyCount;
+		public float spawnWait;
+	}
 	//both hazards and hazardsCount are parallel arrays. Hazards must be the same size as
-	public GameObject[] hazards;
-	public int[] hazardsCount;
-	public float[] spawnWaits;
+	public Hazard[] hazards;
 
 	public Vector3 spawnValues;
 	//public int hazardCount;
@@ -22,14 +27,21 @@ public class Done_GameController : MonoBehaviour
 	private bool restart;
 	private int score;
 	private int head;
-	public int totalHazards;
+	public static int totalHazards;
 	
 	void Start ()
 	{
-		for (int i = 0; i < hazardsCount.Length; i++) {
-			totalHazards += hazardsCount [i];
+		OnBegin ();
+	}
+
+	void OnBegin () {
+		Debug.Log ("Starting");
+		totalHazards = 0;
+		head = 0;
+		for (int i = 0; i < hazards.Length; i++) {
+			totalHazards += hazards[i].enemyCount;
 		}
-		Debug.Log (totalHazards);
+		Debug.Log ("totalHazards: " + totalHazards);
 		gameOver = false;
 		restart = false;
 		restartText.text = "";
@@ -37,10 +49,6 @@ public class Done_GameController : MonoBehaviour
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
-	}
-
-	void OnBegin () {
-		
 	}
 	
 	void Update ()
@@ -50,6 +58,7 @@ public class Done_GameController : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.R))
 			{
 				Application.LoadLevel (Application.loadedLevel);
+				OnBegin ();
 			}
 		}
 	}
@@ -65,26 +74,27 @@ public class Done_GameController : MonoBehaviour
 				restart = true;
 				break;
 			}
-
-			for (int i = 0; i < hazardsCount[head] && head < hazardsCount.Length; i++)
+			Debug.Log("head: " + head);
+			for (int i = 0; head < hazards.Length && i < hazards[head].enemyCount; i++)
 			{
-				GameObject hazard = hazards [head];
+				GameObject hazard = hazards [head].enemy;
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                //Debug.Log(spawnPosition);
+                
 
                 Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (hazard, spawnPosition, spawnRotation);
 
 				if (!gameOver) {
-					yield return new WaitForSeconds (spawnWaits[head]);
+					yield return new WaitForSeconds (hazards[head].spawnWait);
 				}
 			}
 
 			if (!gameOver) {
 				yield return new WaitForSeconds (Random.Range(1f, waveWait));
 			}
+				
 			head++;
-			Debug.Log (hazardsCount.Length + " " + head);
+			//Debug.Log (hazards.Length + " " + head);
 
 			if (totalHazards <= 0 && !gameOver) {
 				WinGame ();

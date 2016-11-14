@@ -20,8 +20,7 @@ public class Done_DestroyByBoundary : MonoBehaviour
 	void OnTriggerExit2D (Collider2D other) 
 	{
 		if (other.tag != "BulletEnemy" && other.tag.Contains("Enemy")) {
-			gameController.totalHazards--;
-			Debug.Log ("DestroyByBoundary totalHazards: " + gameController.totalHazards);
+			Done_GameController.totalHazards--;
 		}
 		Destroy(other.gameObject);
 	}

@@ -23,8 +23,7 @@ public class Done_DestroyByTime : MonoBehaviour
 
 	void Update () {
 		if (gameObject == null) {
-			gameController.totalHazards--;
-			Debug.Log ("DestroyByTime totalHazards: " + gameController.totalHazards);
+			Done_GameController.totalHazards--;
 		}
 	}
 }
