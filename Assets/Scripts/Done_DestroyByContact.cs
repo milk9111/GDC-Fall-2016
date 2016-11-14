@@ -32,6 +32,8 @@ public class Done_DestroyByContact : MonoBehaviour
 		{
 			return;
 		}
+		Debug.Log (this.name);
+		gameController.AddScore(scoreValue);
 
 		if (explosion != null)
 		{
@@ -44,7 +46,7 @@ public class Done_DestroyByContact : MonoBehaviour
 			gameController.GameOver();
 		}
 		
-		gameController.AddScore(scoreValue);
+
 		Destroy (other.gameObject);
 		Destroy (gameObject);
 		if (other.tag != "Player") {
