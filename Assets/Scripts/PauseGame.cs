@@ -10,6 +10,7 @@ public class PauseGame : MonoBehaviour {
     void Start()
     {
         Cursor.visible = false;
+		Time.timeScale = 1.0f;
     }
     // Update is called once per frame
     void Update() {
@@ -17,7 +18,7 @@ public class PauseGame : MonoBehaviour {
         {
             restart = false;
             Pause();
-            Restart();
+            //Restart();
         }
 
     }
@@ -40,7 +41,7 @@ public class PauseGame : MonoBehaviour {
 
     public void Restart()
     {
-       
+		Application.LoadLevel (Application.loadedLevel);
     }
 
 
