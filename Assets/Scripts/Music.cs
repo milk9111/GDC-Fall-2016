@@ -29,9 +29,15 @@ public class Music : MonoBehaviour {
 	}
 
 	public void Mute () {
-		listener.enabled = !listener.enabled;
-		if (listener.enabled) {
-			source.Play ();
+		//listener.enabled = !listener.enabled;
+		if (AudioListener.volume == 1.0f) {
+			AudioListener.volume = 0.0f;
+		} else {
+			AudioListener.volume = 1.0f;
 		}
+
+		/*&if (listener.enabled) {
+			source.Play ();
+		}*/
 	}
 }
