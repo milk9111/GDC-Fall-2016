@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Music : MonoBehaviour {
     public AudioClip[] backgroundMusic; 
+	public AudioListener listener;
+
 	private AudioSource source;
 	int i =0;
 	// Use this for initialization
@@ -11,6 +13,7 @@ public class Music : MonoBehaviour {
 		source.clip = backgroundMusic[i];
 
 		source.Play ();
+		listener.enabled = true;
 
 
 	}
@@ -23,5 +26,12 @@ public class Music : MonoBehaviour {
 
 		}
 	
+	}
+
+	public void Mute () {
+		listener.enabled = !listener.enabled;
+		if (listener.enabled) {
+			source.Play ();
+		}
 	}
 }
