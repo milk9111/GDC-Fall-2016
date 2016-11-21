@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour {
     public Transform Canvas;
@@ -42,9 +43,15 @@ public class PauseGame : MonoBehaviour {
 
     public void Restart()
     {
-		Application.LoadLevel (Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //Application.LoadLevel (Application.loadedLevel);
     }
 
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
 
 
