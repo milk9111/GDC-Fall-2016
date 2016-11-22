@@ -19,12 +19,6 @@ public class Done_PlayerController : MonoBehaviour
 	public float fireRate;
 	 
 	private float nextFire;
-
-    /*private int testInt;
-
-    void Start() {
-        testInt = 1;
-    }*/
     
 
 	void Update ()
