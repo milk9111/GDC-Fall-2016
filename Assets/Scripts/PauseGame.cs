@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour {
     public Transform Canvas;
@@ -10,6 +11,9 @@ public class PauseGame : MonoBehaviour {
     void Start()
     {
         Cursor.visible = false;
+		Time.timeScale = 1.0f;
+        
+		//listener.enabled = true;
     }
     // Update is called once per frame
     void Update() {
@@ -17,7 +21,7 @@ public class PauseGame : MonoBehaviour {
         {
             restart = false;
             Pause();
-            Restart();
+            //Restart();
         }
 
     }
@@ -40,8 +44,16 @@ public class PauseGame : MonoBehaviour {
 
     public void Restart()
     {
-       
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
+
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 
 
 }
