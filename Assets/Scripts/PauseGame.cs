@@ -12,6 +12,7 @@ public class PauseGame : MonoBehaviour {
     {
         Cursor.visible = false;
 		Time.timeScale = 1.0f;
+        
 		//listener.enabled = true;
     }
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class PauseGame : MonoBehaviour {
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //Application.LoadLevel (Application.loadedLevel);
+        
     }
 
 
