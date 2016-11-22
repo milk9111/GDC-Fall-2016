@@ -18,7 +18,7 @@ public class RotatingPattern : MonoBehaviour {
     }
 
     public void Fire() {
-        Instantiate(shot, transform.position, shotSpawn.rotation);
+		Instantiate(shot, transform.position, shotSpawn.rotation);
     }
 
     void Update() {
