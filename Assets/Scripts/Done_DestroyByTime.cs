@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Done_DestroyByTime : MonoBehaviour
 {
 	public float lifetime;
+    private float deathTime = 0;
 
 	private Done_GameController gameController;
 
@@ -17,11 +18,15 @@ public class Done_DestroyByTime : MonoBehaviour
 		{
 			Debug.Log ("Cannot find 'GameController' script");
 		}
-
-		Destroy (gameObject, lifetime);
+        
+		//Destroy (gameObject, lifetime);
 	}
 
 	void Update () {
+        deathTime += Time.deltaTime;
+        if (deathTime >= lifetime) {
+            BulletCache.activeCache.requeueBullet(gameObject);
+        }
 		if (gameObject == null) {
 			Done_GameController.totalHazards--;
 		}

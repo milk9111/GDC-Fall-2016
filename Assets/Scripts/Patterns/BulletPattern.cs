@@ -8,13 +8,12 @@ public class BulletDetails {
 	public int shotCount;
 }
 
-public abstract class BulletPattern : MonoBehaviour, Pattern {
+public abstract class BulletPattern : PatternParent, Pattern {
 
 	//These will be changed to private as this bullet pattern
 	//will be instantiated by a later bullet system that
 	//will be applied to all enemies.
-
-	public GameObject shot;
+    
 	public Transform shotSpawn;
 	public BulletDetails bulletDetails;
 
