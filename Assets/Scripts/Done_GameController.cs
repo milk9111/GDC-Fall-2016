@@ -40,6 +40,8 @@ public class Done_GameController : MonoBehaviour
 		head = 0;
 		for (int i = 0; i < hazards.Length; i++) {
 			totalHazards += hazards[i].enemyCount;
+
+            BulletCache.activeCache.addBulletToEnemyCache(hazards[i].enemy.GetComponent<PatternParent>().shot);
 		}
 		Debug.Log ("totalHazards: " + totalHazards);
 		gameOver = false;

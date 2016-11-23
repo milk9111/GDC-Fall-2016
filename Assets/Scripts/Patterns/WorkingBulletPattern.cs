@@ -1,16 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class WorkingBulletPattern : MonoBehaviour {
-
-	public GameObject shot;
+public class WorkingBulletPattern : PatternParent {
 	public Transform shotSpawn;
 	public BulletDetails bulletDetails;
 	public bool halfMoon;
 	private float shotAngle;
 	private float halfsies;
+    private int myBulletID = 0;
 
-	public void Start ()
+    public void Start ()
 	{
 		float totalDegrees = 360;
 		/*if (halfMoon) {
@@ -22,8 +21,9 @@ public class WorkingBulletPattern : MonoBehaviour {
 			shotAngle = (totalDegrees / bulletDetails.shotCount);
 		} else {
 			shotAngle = 180;
-		}
-		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
+        }
+        myBulletID = BulletCache.activeCache.getBulletID(shot);
+        InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
 	public void Fire ()
@@ -39,10 +39,12 @@ public class WorkingBulletPattern : MonoBehaviour {
 
 		float currentAngle = shotAngle + padding;
         //not getting correct speeds, I think it is from the actual Done_Mover script
-		Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-		//Debug.Log ("first rotation: " + currentAngle);
+        //Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+        BulletCache.activeCache.getEnemyBullet(myBulletID, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
 
-		if (halfMoon) {
+        //Debug.Log ("first rotation: " + currentAngle);
+
+        if (halfMoon) {
 			halfsies = shotAngle / 2;
 		}
 
@@ -53,10 +55,12 @@ public class WorkingBulletPattern : MonoBehaviour {
 			} else {
 				currentAngle = (shotAngle * (i + 1)) + padding;
 			}
-			Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-			//Debug.Log ("rotation: " + currentAngle);
-			//Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
-		}
+            //Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+            BulletCache.activeCache.getEnemyBullet(myBulletID, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+
+            //Debug.Log ("rotation: " + currentAngle);
+            //Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
+        }
 
 	}
 }

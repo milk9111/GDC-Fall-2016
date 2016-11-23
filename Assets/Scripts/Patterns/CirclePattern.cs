@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
 public class CirclePattern : BulletPattern {
-
 	private bool halfMoon = true;
 	private float shotAngle;
 	private float halfsies;
+    private int myBulletID = 0;
 
 
-	public CirclePattern (GameObject theShot, Transform theShotSpawn, BulletDetails theBulletDetails, bool theHalfMoon) :
+    public CirclePattern (GameObject theShot, Transform theShotSpawn, BulletDetails theBulletDetails, bool theHalfMoon) :
 		base (theShot, theShotSpawn, theBulletDetails)
 	{
 		Debug.Log ("created CirclePattern");
@@ -43,7 +43,10 @@ public class CirclePattern : BulletPattern {
 		} else {
 			shotAngle = 180;
 		}
-		InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
+
+        myBulletID = BulletCache.activeCache.getBulletID(shot);
+
+        InvokeRepeating ("Fire", bulletDetails.delay, bulletDetails.fireRate);
 	}
 
 	public override void Fire ()
@@ -61,8 +64,9 @@ public class CirclePattern : BulletPattern {
 		float currentAngle = shotAngle + padding;
 
 		Debug.Log (shot);
-		Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-		Debug.Log ("created bullet");
+        //Instantiate (shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+        BulletCache.activeCache.getEnemyBullet(myBulletID, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+        Debug.Log ("created bullet");
 		//Debug.Log ("first rotation: " + currentAngle);
 
 		if (halfMoon) {
@@ -76,10 +80,11 @@ public class CirclePattern : BulletPattern {
 			} else {
 				currentAngle = (shotAngle * (i + 1)) + padding;
 			}
-			Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
-			//Debug.Log ("rotation: " + currentAngle);
-			//Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
-		}
+            //Instantiate(shot, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+            BulletCache.activeCache.getEnemyBullet(myBulletID, transform.position, Quaternion.Euler(0.0f, 180.0f, currentAngle));
+            //Debug.Log ("rotation: " + currentAngle);
+            //Debug.Log ("clone instantiation rotation: " + clone.transform.rotation);
+        }
 	
 	}
 }
