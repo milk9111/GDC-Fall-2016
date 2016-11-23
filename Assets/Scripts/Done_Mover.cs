@@ -8,11 +8,15 @@ public class Done_Mover : MonoBehaviour
 
 	//This is the default speed for the bullets and enemies. Bullet patterns for enemies 
 	//will override this.
-	void Start ()
-	{
+	void Start () {
+        changeSpeed(speed);
+	}
+
+    public void changeSpeed(float newSpeed) {
+        speed = newSpeed;
         velocity.x = Mathf.Sin(transform.eulerAngles.y * (Mathf.PI / 180)) * speed;
         velocity.y = Mathf.Cos(transform.eulerAngles.y * (Mathf.PI / 180)) * speed;
-	}
+    }
 
     void Update() {
         //Debug.Log("Pre: Velocity: " + velocity.ToString() + " Pos: " + transform.position.ToString());
