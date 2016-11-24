@@ -20,7 +20,7 @@ public class BulletSystem : MonoBehaviour {
 			default:
 				break;
 		}*/
-		Debug.Log (patternType.Equals("C"));
+		//Debug.Log (patternType.Equals("C"));
 		/*if (patternType.Equals ("C")) {
 			pattern = Instantiate (bulletPattern, spawn) as CirclePattern;
 		} else {
@@ -31,13 +31,13 @@ public class BulletSystem : MonoBehaviour {
 
 	IEnumerator StartFire () {
 
-		Debug.Log ("inside coroutine");
+		//Debug.Log ("inside coroutine");
 		while (true) {
-			Debug.Log ("inside coroutine loop");
+			//Debug.Log ("inside coroutine loop");
 			//Debug.Log (pattern);
             pattern.Fire();
 			//pattern.Invoke ("Fire", pattern.GetDetails ().delay);
-			Debug.Log ("fired a shot");
+			//Debug.Log ("fired a shot");
 			yield return new WaitForSeconds (pattern.GetDetails().delay);
 		}
 	}

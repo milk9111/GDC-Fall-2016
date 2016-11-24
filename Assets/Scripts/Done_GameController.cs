@@ -35,7 +35,7 @@ public class Done_GameController : MonoBehaviour
 	}
 
 	void OnBegin () {
-		Debug.Log ("Starting");
+		//Debug.Log ("Starting");
 		totalHazards = 0;
 		head = 0;
 		for (int i = 0; i < hazards.Length; i++) {
@@ -43,7 +43,7 @@ public class Done_GameController : MonoBehaviour
 
             BulletCache.activeCache.addBulletToEnemyCache(hazards[i].enemy.GetComponent<PatternParent>().shot);
 		}
-		Debug.Log ("totalHazards: " + totalHazards);
+		//Debug.Log ("totalHazards: " + totalHazards);
 		gameOver = false;
 		restart = false;
 		restartText.text = "";
@@ -76,7 +76,7 @@ public class Done_GameController : MonoBehaviour
 				restart = true;
 				break;
 			}
-			Debug.Log("head: " + head);
+			//Debug.Log("head: " + head);
 			for (int i = 0; head < hazards.Length && i < hazards[head].enemyCount; i++)
 			{
 				GameObject hazard = hazards [head].enemy;

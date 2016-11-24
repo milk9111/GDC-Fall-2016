@@ -30,7 +30,7 @@ public class Done_DestroyByContact : MonoBehaviour
         if (other.tag == "Boundary" || other.tag.Contains("Enemy")) {
             return;
         }
-        Debug.Log(this.name);
+        //Debug.Log(this.name);
         gameController.AddScore(scoreValue);
 
         if (explosion != null) {

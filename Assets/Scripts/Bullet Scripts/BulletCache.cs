@@ -107,15 +107,15 @@ public class BulletCache : MonoBehaviour {
     }
 
     public int addBulletToEnemyCache(GameObject bulletObject) {
-        print("Attempting to add bullet " + bulletObject.name + " to enemy cache.");
+        //print("Attempting to add bullet " + bulletObject.name + " to enemy cache.");
         for (int i = 0; i < enemyBulletTypes.Length; i++) {
-            print(i.ToString() + " : " + enemyBulletTypes[i].bulletToStore.name + ", " + bulletObject.name);
+            //print(i.ToString() + " : " + enemyBulletTypes[i].bulletToStore.name + ", " + bulletObject.name);
             if (bulletObject.name.Contains(enemyBulletTypes[i].bulletToStore.name)) {
-                print("Found bullet with index " + i.ToString());
+                //print("Found bullet with index " + i.ToString());
                 return i;
             }
         }
-        print("Did not find bullet " + bulletObject.name +". Current cache length: " + enemyBulletTypes.Length.ToString());
+        //print("Did not find bullet " + bulletObject.name +". Current cache length: " + enemyBulletTypes.Length.ToString());
         System.Array.Resize(ref enemyBulletTypes, enemyBulletTypes.Length + 1);
         CacheDetails newDetails = new CacheDetails();
         newDetails.bulletToStore = Instantiate(bulletObject);
@@ -123,7 +123,8 @@ public class BulletCache : MonoBehaviour {
         newDetails.bulletToStore.SetActive(false);
         newDetails.numberOfBullets = 200;
         enemyBulletTypes[enemyBulletTypes.Length - 1] = newDetails;
-        print("Did not find bullet " + bulletObject.name + ". New cache length: " + enemyBulletTypes.Length.ToString());
+        //
+		//print("Did not find bullet " + bulletObject.name + ". New cache length: " + enemyBulletTypes.Length.ToString());
         restockBullets(200);
         return enemyBulletTypes.Length - 1;
     }
