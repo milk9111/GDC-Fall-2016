@@ -4,6 +4,7 @@ using System.Collections;
 public class UnitInfo : MonoBehaviour {
 
 	public GameObject explosion;
+	public GameObject gameOverlay;
 	//public Texture damaged;
 
 	public long maxHealth;
@@ -26,7 +27,8 @@ public class UnitInfo : MonoBehaviour {
 		if ( !invulnerable ) {
 
 			//Enemy bullet hit player
-			if ((this.tag == "Player" || this.tag == "Ally") && other.tag == "BulletEnemy") {
+			if (this.tag == "Player"&& other.tag == "BulletEnemy") {
+				Debug.Log ("enemy bullet hit player");
 
 				damageHandlerBullet(other);
 
@@ -38,16 +40,18 @@ public class UnitInfo : MonoBehaviour {
 				showHealth();
 
 			//Player hit enemy
-			} else if ((this.tag == "Player" || this.tag == "Ally") && other.tag == "Enemy") {
+			} else if (this.tag == "Player" && other.tag == "Enemy") {
 
 				damageHandlerUnit(other);
 
 			//Enemy hit player
-			} else if (this.tag == "Enemy" && (other.tag == "Player" || other.tag == "Ally")) {
+			} else if (this.tag == "Enemy" && other.tag == "Player") {
 
 				damageHandlerUnit(other);
+				if (!this.tag.Equals ("Player")) {
+					showHealth ();
+				}
 
-				showHealth();
 
 			} else if (this.tag == "Player" && other.tag == "Potion") {
 
@@ -62,6 +66,12 @@ public class UnitInfo : MonoBehaviour {
 			if (currentHealth <= 0) {
 
 				GameObject.Find("Game Overlay").GetComponent<ScoreTracker>().increaseScore(points);
+				if (explosion != null) {
+					Debug.Log ("Made explosion");
+					Instantiate(explosion, transform.position, transform.rotation);
+				}
+					
+				//Destroy (other.gameObject);
 				Destroy(this.gameObject);
 			}
 		}
@@ -78,14 +88,15 @@ public class UnitInfo : MonoBehaviour {
 			BulletCache.activeCache.requeueBullet(other.gameObject);
 		} 
 
-		if (other.gameObject.GetComponent<Damage>().getDamage() >= 0)
-			currentHealth -= other.gameObject.GetComponent<Damage>().getDamage();
+		if (other.gameObject.GetComponent<Damage> ().getDamage () >= 0) {
+			currentHealth -= other.gameObject.GetComponent<Damage> ().getDamage ();
 
 		// The gameObject will be destroyed if an enemy has negative damage.
-		else
+		} else {
 			currentHealth = 0;
+		}
 
-		Debug.Log (other.name);
+		//Debug.Log (other.name);
 		//Destroy(other);
 	}
 
@@ -93,17 +104,12 @@ public class UnitInfo : MonoBehaviour {
 
 		if (other.gameObject.GetComponent<UnitInfo> ().getDamage () >= 0) {
 			currentHealth -= other.gameObject.GetComponent<UnitInfo> ().getDamage ();
-			StartCoroutine(changeColor2 (other));
+			//StartCoroutine(changeColor2 (other));
 		}
 
 		// The gameObject will be destroyed if an enemy has negative damage.
 		else {
 			currentHealth = 0;
-			if (explosion != null) {
-				Debug.Log ("Made explosion");
-				Instantiate(explosion, transform.position, transform.rotation);
-			}
-			Destroy (other);
 		}
 	}
 

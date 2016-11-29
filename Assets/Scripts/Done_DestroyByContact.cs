@@ -31,7 +31,7 @@ public class Done_DestroyByContact : MonoBehaviour
             return;
         }
         //Debug.Log(this.name);
-        gameController.AddScore(scoreValue);
+        //gameController.AddScore(scoreValue);
 
         if (explosion != null) {
             Instantiate(explosion, transform.position, transform.rotation);
@@ -39,7 +39,7 @@ public class Done_DestroyByContact : MonoBehaviour
 
         if (other.tag == "Player") {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            gameController.GameOver();
+            //gameController.GameOver();
         }
 
         // If we're an enemy and the other gameObject is a bullet, requeue it.
