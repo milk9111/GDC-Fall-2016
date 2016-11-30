@@ -64,15 +64,15 @@ public class UnitInfo : MonoBehaviour {
 			}
 
 			if (currentHealth <= 0) {
-
-				GameObject.Find("Game Overlay").GetComponent<ScoreTracker>().increaseScore(points);
+				//print ("KAFREAKINBOOM");
+				GameObject.Find ("Game Overlay").GetComponent<ScoreTracker> ().increaseScore (points);
 				if (explosion != null) {
 					Debug.Log ("Made explosion");
-					Instantiate(explosion, transform.position, transform.rotation);
+					Instantiate (explosion, transform.position, transform.rotation);
 				}
 					
 				//Destroy (other.gameObject);
-				Destroy(this.gameObject);
+				Destroy (this.gameObject);
 			}
 		}
 	}
@@ -81,7 +81,7 @@ public class UnitInfo : MonoBehaviour {
 
 		// If we're an enemy and the other gameObject is a bullet, requeue it.
 		if (other.gameObject.tag == "Bullet") {
-			Debug.Log ("Requeued player bullet");
+			//Debug.Log ("Requeued player bullet");
 			BulletCache.activeCache.requeueBullet(other.gameObject, true);
 		} else {
 			Debug.Log ("Requeued enemy bullet");
@@ -89,10 +89,17 @@ public class UnitInfo : MonoBehaviour {
 		} 
 
 		if (other.gameObject.GetComponent<Damage> ().getDamage () >= 0) {
+			
 			currentHealth -= other.gameObject.GetComponent<Damage> ().getDamage ();
+			if (this.tag.Equals ("Player")) {
+				Debug.Log ("Player health left: " + currentHealth);
+
+			}
 
 		// The gameObject will be destroyed if an enemy has negative damage.
 		} else {
+			if (this.tag.Equals ("Player"))
+				Debug.Log ("in here2");
 			currentHealth = 0;
 		}
 
