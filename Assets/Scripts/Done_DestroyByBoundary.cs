@@ -22,6 +22,11 @@ public class Done_DestroyByBoundary : MonoBehaviour
 		if (other.tag != "BulletEnemy" && other.tag.Contains("Enemy")) {
 			Done_GameController.totalHazards--;
 		}
-		Destroy(other.gameObject);
+
+		if (other.tag != "BulletEnemy" && other.tag != "Bullet") {
+			Destroy (other.gameObject);
+		} else {
+			BulletCache.activeCache.requeueBullet(other.gameObject);
+		}
 	}
 }

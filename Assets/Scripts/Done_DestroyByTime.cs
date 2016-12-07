@@ -26,6 +26,7 @@ public class Done_DestroyByTime : MonoBehaviour
         deathTime += Time.deltaTime;
         if (deathTime >= lifetime) {
             BulletCache.activeCache.requeueBullet(gameObject);
+			deathTime = 0;
         }
 		if (gameObject == null) {
 			Done_GameController.totalHazards--;
